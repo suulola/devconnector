@@ -16,10 +16,10 @@ class Landing extends Component {
                     help from other developers
                   </p>
                   <hr />
-                  <Link href="" className="btn btn-lg btn-info mr-2">
+                  <Link to="/register" className="btn btn-lg btn-info mr-2">
                     Sign Up
                   </Link>
-                  <Link href="" className="btn btn-lg btn-light">
+                  <Link to="/login" className="btn btn-lg btn-light">
                     Login
                   </Link>
 
