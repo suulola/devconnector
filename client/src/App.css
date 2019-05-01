@@ -37,3 +37,10 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+/* #footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+
+} */

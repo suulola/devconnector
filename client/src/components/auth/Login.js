@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import {withRouter} from 'react-router-dom'
+import classnames from 'classnames'
+import { loginUser } from "../../actions/authAction";
 
 class Login extends Component {
   state = {
@@ -13,16 +18,17 @@ class Login extends Component {
     });
   };
   onSubmit = e => {
-    e.preventDefault()
-    const user = {
+    e.preventDefault();
+    const userData = {
       email: this.state.email,
       password: this.state.password
     };
 
-    console.log(user)
+    this.props.loginUser(userData, this.props.history);
   };
 
   render() {
+    const {errors} = this.props
     return (
       <div className="login">
         <div className="container">
@@ -40,8 +46,9 @@ class Login extends Component {
                     placeholder="Email address"
                     onChange={this.onChange}
                     value={this.state.email}
-                    className="form-control"
+                    className={classnames('form-control', {'is-invalid': errors.email})}
                   />
+                  {errors.email && ( <div className="invalid-feedback">{errors.email}</div> )}
                 </div>
                 <div className="form-group">
                   <input
@@ -50,8 +57,11 @@ class Login extends Component {
                     placeholder="Password"
                     onChange={this.onChange}
                     value={this.state.password}
-                    className="form-control"
+                    className={classnames('form-control', { 'is-invalid': errors.password })}
+
                   />
+                  {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+
                 </div>
                 <input
                   type="submit"
@@ -66,5 +76,18 @@ class Login extends Component {
     );
   }
 }
+Login.propTypes = {
+  errors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+};
 
-export default Login;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors,
+})
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(withRouter(Login));
