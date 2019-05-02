@@ -22,6 +22,7 @@ export const loginUser = (userData, history) => dispatch => {
     setAuthToken(token)
     // get the user data out of the token
     const decoded = jwt_decode(token)
+    // set the current user to the user data
     dispatch({
       type: 'SET_CURRENT_USER',
       payload: decoded
@@ -34,4 +35,18 @@ export const loginUser = (userData, history) => dispatch => {
     type: 'GET_ERRORS',
     payload: err.response.data
   }))
+}
+
+export const logoutUser = () => dispatch => {
+  // remove from localStorage
+  localStorage.removeItem('jwtToken')
+  //remove authorization from header
+  setAuthToken(false)
+  // OR delete axios.defaults.headers.common['Authorization']
+  //remove the user from state
+  dispatch({
+    type: 'SET_CURRENT_USER',
+    payload: {}
+  })
+
 }

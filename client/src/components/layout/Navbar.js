@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 
 export class Navbar extends Component {
   render() {
@@ -48,4 +51,12 @@ export class Navbar extends Component {
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+
+};
+
+const mapStateToProps = state => ({
+  auth: PropTypes.object.isRequired,
+})
+
+export default connect(mapStateToProps)(Navbar);
