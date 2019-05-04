@@ -62,6 +62,9 @@ router.post("/login", (req, res) => {
       if (!user) {
         res.status(404).json({ email: "User doesn't exist" });
       }
+      if (!password) {
+        res.status(404).json({ password: "Enter password" });
+      }
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // if successful create a token
