@@ -13,6 +13,8 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import setAuthToken from "./utils/setAuthToken";
+import { logoutUser } from "./actions/authAction";
+import CreateProfile from "./components/create-profile/CreateProfile";
 
 if(localStorage.jwtToken) {
   //set authorization token header
@@ -24,6 +26,13 @@ if(localStorage.jwtToken) {
     type: 'SET_CURRENT_USER',
     payload: decoded
   })
+  const currentTime = Date.now() / 1000
+  if(decoded.exp < currentTime) {
+    //logout user, clear current profile and redirect to login
+    store.dispatch(logoutUser())
+   window.location.href = '/login'
+
+  }
 }
 
 
@@ -38,6 +47,7 @@ class App extends React.Component {
           <Route exact path="/" component={Landing} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/create" component={CreateProfile} />
         </Switch>
         <Footer />
       </BrowserRouter>

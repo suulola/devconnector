@@ -42,7 +42,7 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem('jwtToken')
   //remove authorization from header
   setAuthToken(false)
-  // OR delete axios.defaults.headers.common['Authorization']
+  // OR delete axios.defaults.headers.common['Authorization'] - you ll need to import axios tho
   //remove the user from state
   dispatch({
     type: 'SET_CURRENT_USER',
