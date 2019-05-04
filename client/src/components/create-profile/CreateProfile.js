@@ -24,7 +24,6 @@ class CreateProfile extends Component {
     facebook: "",
     linkedin: "",
     instagram: "",
-    errors: {}
   };
 
   onChange = e => {
@@ -226,8 +225,8 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  errors: PropTypes.string.isRequired,
-  profile: PropTypes.string.isRequired,
+  errors: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

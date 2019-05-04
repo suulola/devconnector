@@ -20,7 +20,8 @@ function TextFieldGroup({
         onChange={onChange}
         placeholder={placeholder}
         value={value}
-        className={classnames("form-control", { "is-invalid": error })}
+        
+        className={classnames("form-control ", { "is-invalid": error })}
         disabled={disabled}
       />
       {info && <small className="form-text text-muted">{info}</small>}
