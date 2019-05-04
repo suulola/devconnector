@@ -60,10 +60,7 @@ router.post("/login", (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        res.status(404).json({ email: "User doesn't exist" });
-      }
-      if (!password) {
-        res.status(404).json({ password: "Enter password" });
+        return res.status(404).json({ email: "User doesn't exist" });
       }
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
@@ -83,7 +80,7 @@ router.post("/login", (req, res) => {
           );
         } else {
           errors.password = 'Password Incorrect'
-          res.status(400).json(errors);
+          return res.status(400).json(errors);
         }
       });
     })
@@ -94,7 +91,7 @@ router.get(
   "/current",
   password.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.json(req.user);
+   return res.json(req.user);
   }
 );
 
