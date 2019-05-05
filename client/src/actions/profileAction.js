@@ -12,7 +12,7 @@ axios.post('/api/profile/', profileData )
 
 export const getCurrentProfile = () => dispatch => {
 dispatch({
-  type: 'SET_PROFILE_LOADING'
+  type: 'PROFILE_LOADING'
 })
 axios.get('/api/profile')
 .then(profile => dispatch({

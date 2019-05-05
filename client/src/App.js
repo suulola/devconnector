@@ -14,9 +14,10 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import setAuthToken from "./utils/setAuthToken";
 import { logoutUser } from "./actions/authAction";
-import CreateProfile from "./components/create-profile/CreateProfile";
+import CreateProfile from "./components/profile/CreateProfile";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import EditProfile from "./components/profile/EditProfile";
 
 if (localStorage.jwtToken) {
   //set authorization token header
@@ -32,6 +33,9 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     //logout user, clear current profile and redirect to login
     store.dispatch(logoutUser());
+    store.dispatch({
+      type: 'CLEAR_CURRENT_USER'
+    })
     window.location.href = "/login";
   }
 }
@@ -48,6 +52,7 @@ class App extends React.Component {
             <Route path="/login" component={Login} />
             <PrivateRoute path="/create-profile" component={CreateProfile} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRoute path="/edit-profile" component={EditProfile} />
           </Switch>
           <Footer />
         </BrowserRouter>

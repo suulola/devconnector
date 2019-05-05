@@ -18,11 +18,5 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setCurrentUser = decoded => {
-  return {
-    type: "SET_CURRENT_USER",
-    payload: decoded
-  };
-};
 
 export default authReducer;

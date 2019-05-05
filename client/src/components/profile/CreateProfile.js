@@ -39,7 +39,7 @@ class CreateProfile extends Component {
       website: this.state.website,
       location: this.state.location,
       status: this.state.status,
-      skills: this.state.handle,
+      skills: this.state.skills,
       bio: this.state.bio,
       githubusername: this.state.githubusername,
       youtube: this.state.youtube,
