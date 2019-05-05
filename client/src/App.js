@@ -18,6 +18,8 @@ import CreateProfile from "./components/profile/CreateProfile";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import EditProfile from "./components/profile/EditProfile";
+import AddEducation from "./components/credentials/AddEducation";
+import AddExperience from "./components/credentials/AddExperience";
 
 if (localStorage.jwtToken) {
   //set authorization token header
@@ -53,6 +55,8 @@ class App extends React.Component {
             <PrivateRoute path="/create-profile" component={CreateProfile} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/edit-profile" component={EditProfile} />
+            <PrivateRoute path="/add-education" component={AddEducation} />
+            <PrivateRoute path="/add-experience" component={AddExperience} />
           </Switch>
           <Footer />
         </BrowserRouter>
