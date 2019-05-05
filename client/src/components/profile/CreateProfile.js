@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { connect } from "react-redux";
@@ -23,7 +23,7 @@ class CreateProfile extends Component {
     twitter: "",
     facebook: "",
     linkedin: "",
-    instagram: "",
+    instagram: ""
   };
 
   onChange = e => {
@@ -172,12 +172,12 @@ class CreateProfile extends Component {
                   error={errors.location}
                 />
                 <TextFieldGroup
-                  placeholder="Skills"
+                  placeholder="* Skills"
                   name="skills"
                   onChange={this.onChange}
                   value={this.state.skills}
                   error={errors.skills}
-                  info='Please use comme separated value (e.g HTML,CSS,React) '
+                  info="Please use comme separated value (e.g HTML,CSS,React) "
                 />
                 <TextFieldGroup
                   placeholder="Github Username"
@@ -187,12 +187,12 @@ class CreateProfile extends Component {
                   error={errors.githubusername}
                 />
                 <TextAreaFieldGroup
-                error={errors.bio}
-                name='bio'
-                info='Tell us something unique about you'
-                onChange={this.onChange}
-                placeholder='Short Bio'
-                value={this.state.bio}
+                  error={errors.bio}
+                  name="bio"
+                  info="Tell us something unique about you"
+                  onChange={this.onChange}
+                  placeholder="Short Bio"
+                  value={this.state.bio}
                 />
 
                 <div className="mb-3">
@@ -226,8 +226,8 @@ class CreateProfile extends Component {
 
 CreateProfile.propTypes = {
   errors: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-}
+  profile: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   errors: state.errors,
