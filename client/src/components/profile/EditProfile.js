@@ -107,6 +107,7 @@ class EditProfile extends Component {
 
   render() {
     const { errors } = this.props;
+    const { user } = this.props.auth
     const { displaySocialInputs } = this.state;
 
     var socialInputs;
@@ -163,10 +164,7 @@ class EditProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Your Profile</h1>
-              <p className="lead text-center">
-                Input Information here to build your profile
-              </p>
+              <h1 className="display-4 text-center">Update Your Profile {user.name} </h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -267,7 +265,7 @@ class EditProfile extends Component {
                 <input
                   type="submit"
                   className="btn btn-info btn-block mt-4"
-                  value="Create Profile"
+                  value="Update Profile"
                 />
               </form>
             </div>
@@ -280,10 +278,12 @@ class EditProfile extends Component {
 
 EditProfile.propTypes = {
   errors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   errors: state.errors,
   profile: state.profile
 });
