@@ -1,3 +1,4 @@
+require('env').config()
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -6,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // created modules
-const db = require("./config/keys").mongoURI;
+const db = process.env.mongoURI;
 const users = require("./routes/api/users");
 const posts = require("./routes/api/posts");
 const profile = require("./routes/api/profile");
