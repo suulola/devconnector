@@ -16,7 +16,7 @@ npm install && npm start
 - NodeJS
 
 ## Hosted
-[Hosted on Heroku](, 'still in progress')
+[Hosted on Heroku](https://floating-inlet-96034.herokuapp.com/dashboard, 'still in progress')
 
 ```
 
