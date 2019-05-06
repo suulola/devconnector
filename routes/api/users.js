@@ -4,7 +4,6 @@ const User = require("../../models/User");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
 const password = require("passport");
 
 const validateRegisterInput = require("../../validation/register");
@@ -60,7 +59,7 @@ router.post("/login", (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        res.status(404).json({ email: "User doesn't exist" });
+        return res.status(404).json({ email: "User doesn't exist" });
       }
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
@@ -69,8 +68,8 @@ router.post("/login", (req, res) => {
 
           jwt.sign(
             payload,
-            keys.secretOrKey,
-            { expiresIn: 3600000 }, //change back to 3600 for 1 hour later
+            process.env.secretOrKey,
+            { expiresIn: 3600 }, //change back to 3600 for 1 hour later
             (err, token) => {
               res.json({
                 success: true,
@@ -80,18 +79,18 @@ router.post("/login", (req, res) => {
           );
         } else {
           errors.password = 'Password Incorrect'
-          res.status(400).json(errors);
+          return res.status(400).json(errors);
         }
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => res.status(404).json(err));
 });
 
 router.get(
   "/current",
   password.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.json(req.user);
+   return res.json(req.user);
   }
 );
 
