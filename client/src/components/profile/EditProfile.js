@@ -4,10 +4,15 @@ import TextFieldGroup from "../common/TextFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { createProfile, getCurrentProfile } from "../../actions/profileAction";
+import {
+  createProfile,
+  getCurrentProfile,
+  deleteAccount
+} from "../../actions/profileAction";
 import InputGroup from "../common/InputGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import isEmpty from "../../validations/is-empty";
+import { Link } from "react-router-dom";
 
 class EditProfile extends Component {
   state = {
@@ -39,7 +44,7 @@ class EditProfile extends Component {
       profile.location = isEmpty(profile.location) ? "" : profile.location;
       profile.status = isEmpty(profile.status) ? "" : profile.status;
       // skills
-      const skillsCSV = profile.skills.join(",");
+      const skillsCSV = isEmpty(profile.skills) ? "" : profile.skills.join(",");
       profile.bio = isEmpty(profile.bio) ? "" : profile.bio;
       profile.githubusername = isEmpty(profile.githubusername)
         ? ""
@@ -107,7 +112,7 @@ class EditProfile extends Component {
 
   render() {
     const { errors } = this.props;
-    const { user } = this.props.auth
+    const { user } = this.props.auth;
     const { displaySocialInputs } = this.state;
 
     var socialInputs;
@@ -164,7 +169,12 @@ class EditProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Update Your Profile {user.name} </h1>
+              <Link className="mb-3 btn btn-light" to="/dashboard">
+                Go Back
+              </Link>
+              <h1 className=" font-italic text-center">
+                Update Your Profile {user.name}{" "}
+              </h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -257,6 +267,7 @@ class EditProfile extends Component {
                     }
                     type="button"
                   >
+                    {" "}
                     Add Social Network Links
                   </button>
                   <span className="text-muted">Optional</span>
@@ -268,6 +279,12 @@ class EditProfile extends Component {
                   value="Update Profile"
                 />
               </form>
+              <button
+                className=" mt-3 btn btn-danger btn-block"
+                onClick={() => this.props.deleteAccount()}
+              >
+                Delete Account
+              </button>
             </div>
           </div>
         </div>
@@ -279,7 +296,10 @@ class EditProfile extends Component {
 EditProfile.propTypes = {
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -290,5 +310,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile, getCurrentProfile }
+  { createProfile, getCurrentProfile, deleteAccount }
 )(withRouter(EditProfile));

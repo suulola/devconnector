@@ -76,3 +76,40 @@ export const deleteAccount = () => dispatch => {
     }
   }
 };
+
+export const deleteExperience = id => dispatch => {
+  if (window.confirm("Are you sure you want to delete experience")) {
+    axios
+      .delete(`/api/profile/experience/${id}`)
+      .then(profile =>
+        dispatch({
+          type: "GET_PROFILE",
+          payload: profile.data
+        })
+      )
+      .catch(err =>
+        dispatch({
+          type: "GET_ERRORS",
+          payload: err.response.data
+        })
+      );
+  }
+};
+export const deleteEducation = id => dispatch => {
+  if (window.confirm("Are you sure you want to delete education")) {
+    axios
+      .delete(`/api/profile/education/${id}`)
+      .then(profile =>
+        dispatch({
+          type: "GET_PROFILE",
+          payload: profile.data
+        })
+      )
+      .catch(err =>
+        dispatch({
+          type: "GET_ERRORS",
+          payload: err.response.data
+        })
+      );
+  }
+};
