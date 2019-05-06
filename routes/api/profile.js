@@ -34,9 +34,9 @@ router.get(
       .then(profile => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
-          res.status(404).json(errors);
+          return res.status(404).json(errors);
         }
-        res.json(profile);
+        return res.json(profile);
       })
       .catch(err => res.status(404).json(err));
   }
@@ -54,7 +54,7 @@ router.get("/all", (req, res) => {
         errors.noprofile = "No profile exist";
         return res.status(404).json(errors);
       }
-      res.json(profiles);
+      return res.json(profiles);
     })
     .catch(err => res.status(404).json({ noprofile: "No profile exist" }));
 });
@@ -69,9 +69,9 @@ router.get("/handle/:handle", (req, res) => {
     .then(profile => {
       if (!profile) {
         errors.noprofile = "There is no profile for this user";
-        res.status(400).json(errors);
+        return res.status(400).json(errors);
       }
-      res.json(profile);
+      return res.json(profile);
     })
     .catch(err => res.status(404).json(err));
 });
@@ -87,7 +87,7 @@ router.get("/user/:user_id", (req, res) => {
     .then(profile => {
       if (!profile) {
         errors.noprofile = "There is no profile for this user";
-        res.status(404).json(errors);
+        return res.status(404).json(errors);
       }
       res.json(profile);
     })
@@ -146,7 +146,7 @@ router.post(
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = "That profile already exists";
-           return res.status(400).json(errors);
+            return res.status(400).json(errors);
           }
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
